@@ -1,0 +1,22 @@
+{
+  "name": "node_app_project",
+  "version": "0.0.1",
+  "description": "This is a project using Node",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js",
+    "custom": "sleep 2 && node app.js"
+  },
+  "author": "David Carpenter",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
