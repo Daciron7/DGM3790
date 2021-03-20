@@ -2,12 +2,14 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import { apiRouter } from './routes/api.route.js'
 import { productRouter } from './routes/product.route.js'
+import { cardRouter } from './routes/card.route.js'
 import mongoose from 'mongoose'
 import * as dotenv from 'dotenv'
+import cors from 'cors'
 
 dotenv.config()
 
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 5050
 
 const app = express()
 
