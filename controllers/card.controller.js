@@ -1,7 +1,7 @@
 import { Cards } from '../models/cards.js'
 
 export const addCards = ((req, res) => {
-    const card = new Card({
+    const card = new Cards({
         title: req.body.title,
         types: req.body.types,
         image: req.body.image,
