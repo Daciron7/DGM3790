@@ -28,6 +28,7 @@
     "formik": "^2.2.6",
     "fs": "0.0.1-security",
     "mongoose": "^5.11.17",
+    "path": "^0.12.7",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-router-dom": "^5.2.0",

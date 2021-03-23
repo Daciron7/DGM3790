@@ -1,5 +1,6 @@
 import express from 'express'
-import bodyParser from 'body-parser'
+import path from 'path'
+//import bodyParser from 'body-parser'
 import { apiRouter } from './routes/api.route.js'
 import { productRouter } from './routes/product.route.js'
 import { cardRouter } from './routes/card.route.js'
