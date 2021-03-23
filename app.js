@@ -7,19 +7,32 @@ import mongoose from 'mongoose'
 import * as dotenv from 'dotenv'
 import cors from 'cors'
 
+const __dirname = path.dirname(new URL(import.meta.url).pathname)
+
+mongoose.set('useFindAndModify', false);
+
+
 dotenv.config()
 
 const port = process.env.PORT || 5050
 
 const app = express()
 
-app.use(bodyParser.urlencoded({extended: false}))
+app.use(cors())
 
-app.use(express.static('public'))
+app.use(express.urlencoded({extended: true}))
+
+app.use(express.json())
+
+//app.use(express.static('public'))
+
+app.use(express.static(path.join(_dirname, '_client/build')))
 
 app.use('/api', apiRouter)
 
 app.use('/product', productRouter)
+
+app.use('/card', cardRouter)
 
 app.use((req, res, next) => {
     res.status(404).send('<h1>That did not work: Page not found!</h1>')
