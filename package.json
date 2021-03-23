@@ -11,6 +11,10 @@
     "custom": "sleep 2 && node app.js",
     "build": "cd client && npm install && npm run build"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Daciron7/React_Node_App.git"
+  },
   "author": "David Carpenter",
   "license": "ISC",
   "dependencies": {
@@ -22,13 +26,13 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "formik": "^2.2.6",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.0",
-    "react-transition-group": "^4.4.1",
     "fs": "0.0.1-security",
     "mongoose": "^5.11.17",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^4.0.3",
+    "react-transition-group": "^4.4.1",
     "yup": "^0.29.3"
   },
   "devDependencies": {
