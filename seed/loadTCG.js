@@ -35,7 +35,7 @@ const seedMongo = async () => {
   }
   
   const addCard = async (oneCard) => {
-      const card = new Card({
+      const card = new Cards({
           title: oneCard.l,
           types: oneCard.types,
           image: oneCard.i,
