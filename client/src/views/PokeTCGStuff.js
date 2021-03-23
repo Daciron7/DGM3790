@@ -22,7 +22,7 @@ import {
 import SearchIcon from '@material-ui/icons/Search'
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
-import AddCircleIcon from '@material-ui/icons/AddCircle'
+//import AddCircleIcon from '@material-ui/icons/AddCircle'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 
@@ -129,12 +129,9 @@ const CardList = () => {
       return (
         <>
           <form>
-            <TextField placeholder='Search' />
-            <IconButton aria-label='search'>
+            <TextField placeholder='Search' onChange={handleInput} />
+            <IconButton aria-label='search' onClick={handleSearch}>
               <SearchIcon />
-            </IconButton>
-            <IconButton aria-label='add cards'>
-          <AddCircleIcon/>
             </IconButton>
           </form>
           <Container className={classes.root}>
@@ -154,15 +151,15 @@ const CardList = () => {
                     </Typography>
                     <Box className={classes.content}>
                       <Typography variant='subtitle1' color='textSecondary'>
-                        Year: {card.year}
+                       Attacks : {card.attacks}
                       </Typography>
                       <Typography variant='subtitle1' color='textSecondary'>
-                        Rank: {card.rank}
+                        Types: {card.types}
                       </Typography>
                     </Box>
                   </CardContent>
                   <CardActions>
-                    <IconButton aria-label='edit'>
+                    <IconButton aria-label='edit' onClick={() => handleClickEditOpen({card})}>
                       <EditIcon />
                     </IconButton>
                     <IconButton aria-label='delete' onClick={() => handleClickDeleteOpen({card})}>
