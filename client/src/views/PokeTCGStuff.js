@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import axios from 'axios'
+import _ from 'lodash'
 import {
     Container,
     Card,
@@ -22,6 +23,9 @@ import SearchIcon from '@material-ui/icons/Search'
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 import AddCircleIcon from '@material-ui/icons/AddCircle'
+import { Formik } from 'formik'
+import * as Yup from 'yup'
+
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -48,12 +52,12 @@ const CardList = () => {
     const [deleteOpen, setDeleteOpen] = useState(false)
     
     const handleInput = (event) => {
-      debouncedName(event.target.value)
+      debounce(event.target.value)
     }
 
     const debounce = useCallback(
       _.debounce((searchVal) => {
-        setDebouncedName(searchVal)
+          setDebouncedName(searchVal)
       }, 1000),
       [],
     )
@@ -68,7 +72,7 @@ const CardList = () => {
 
     const handleClickEditOpen = (card) => {
       setSelectedCard(card.card)
-      setEdictOpen(true)
+      setEditOpen(true)
     }
 
     const handleCloseEdit = () => {
