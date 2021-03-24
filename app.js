@@ -8,7 +8,7 @@ import mongoose from 'mongoose'
 import * as dotenv from 'dotenv'
 import cors from 'cors'
 
-const __dirname = path.dirname(new URL(import.meta.url).pathname)
+const _dirname = path.dirname(new URL(import.meta.url).pathname)
 
 mongoose.set('useFindAndModify', false);
 
