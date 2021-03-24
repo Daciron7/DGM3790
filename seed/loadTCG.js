@@ -4,13 +4,15 @@ import * as dotenv from 'dotenv'
 import mongoose from 'mongoose'
 dotenv.config()
 
-const seedMongo = async () => {
-    // Mongoose is not connected when the seed is run standalone, so start a new connection here
-    await mongoose.connect(`${process.env.DGM4790_CONNECTION_STRING}`,
-    {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-  })
+const seedMongo = async() => {
+const MongoClient = require('mongodb').MongoClient
+const uri = "mongodb+srv://user:Tacos@cluster0.bda5m.mongodb.net/Project1?retryWrites=true&w=majority"
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+client.connect(err => {
+  const collection = client.db("test").collection("devices")
+  // perform actions on the collection object
+  client.close();
+})
   
   
   const options = {
