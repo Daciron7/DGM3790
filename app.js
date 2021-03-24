@@ -40,7 +40,7 @@ app.use((req, res, next) => {
 })
 
 const main = async () => {
-    await mongoose.connect('${process.env.DGM4790_CONNECTION_STRING}',
+    await mongoose.connect(`${process.env.DGM4790_CONNECTION_STRING}`,
     {
         useNewUrlParser:true,
         useUnifiedTopology:true,
