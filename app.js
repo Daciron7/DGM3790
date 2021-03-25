@@ -31,7 +31,7 @@ app.use(express.static(path.join(_dirname, '_client/build')))
 
 app.use('/api', apiRouter)
 
-app.use('/product', productRouter)
+//app.use('/product', productRouter)
 
 app.use('/card', cardRouter)
 
