@@ -40,5 +40,7 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
-  }
+  },
+
+  "homepage": "https://github.com/Dacironman7/React_Node_App#readme"
 }
