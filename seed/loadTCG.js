@@ -12,7 +12,6 @@ const seedMongo = async () => {
       useUnifiedTopology: true,
 })
   
-  
   const options = {
     method: 'GET',
     url: 'https://api.pokemontcg.io/v2/cards',
