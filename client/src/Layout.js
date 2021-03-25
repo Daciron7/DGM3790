@@ -40,6 +40,9 @@ const useStyles = makeStyles((theme) => ({
     rickmortystuff : {
       color: '#32CD32',
     },
+    cardlist : {
+      color: '#20B2AA',
+    },
     navSpacing: {
         marginRight: '3.5rem',
         color: '#fff',
@@ -104,6 +107,9 @@ export default function ButtonAppBar() {
           <NavLink to='/RickMortyStuff' className={classes.navSpacing}>
             Rick & Morty Stuff
           </NavLink>
+          <NavLink to='/CardList' className={classes.navSpacing}>
+            Pokemon TCG CRUD List
+          </NavLink>
 
           {
             authContext.isAuth ? <Button color='inherit' onClick={handleAuth}>Logout</Button> :
@@ -126,6 +132,9 @@ export default function ButtonAppBar() {
           <ListItem>
           <NavLink to='/RickMortyStuff' className={classes.navSpacing} onClick={handleDrawerToggle}>
             Rick & Morty Stuff
+          </NavLink>
+          <NavLink to='/CardList' className={classes.navSpacing} onClick={handleDrawerToggle}>
+            Pokemon TCG CRUD List
           </NavLink>
           </ListItem>
         </List>
