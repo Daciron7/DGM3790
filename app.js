@@ -45,6 +45,8 @@ const main = async () => {
         useNewUrlParser:true,
         useUnifiedTopology:true,
     })
+    mongoose.then(() => console.log('MongoDB Connected...'))
+    mongoose.catch((err) => console.log(err))
     app.listen(port, () => {
         console.log('Testing app listening at http://localhost:${port}')
     })
