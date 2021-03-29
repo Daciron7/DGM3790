@@ -11,6 +11,8 @@ const seedMongo = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
 })
+mongoose.then(() => console.log('MongoDB Connected...'))
+mongoose.catch((err) => console.log(err))
   
   const options = {
     method: 'GET',
