@@ -17,6 +17,7 @@ mongoose.catch((err) => console.log(err))
   const options = {
     method: 'GET',
     url: 'https://api.pokemontcg.io/v2/cards',
+    params: {q: 'Pikachu'},
     headers: {
       'x-rapidapi-key': `${process.env.POKEMON_TCG_API_KEY}`,
       'x-rapidapi-host': 'https://api.pokemontcg.io'
