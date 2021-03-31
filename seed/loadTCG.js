@@ -6,13 +6,17 @@ dotenv.config()
 
 const seedMongo = async () => {
   // Mongoose is not connected when the seed is run standalone, so start a new connection here
-  await mongoose.connect(`${process.env.DGM4790_CONNECTION_STRING}`,
+  try {
+    await mongoose.connect(`${process.env.DGM4790_CONNECTION_STRING}`,
   {
       useNewUrlParser: true,
       useUnifiedTopology: true,
 })
-mongoose.then(() => console.log('MongoDB Connected...'))
-mongoose.catch((err) => console.log(err))
+  } catch (error) {
+    handleError(error)
+  }
+
+
   
   const options = {
     method: 'GET',
