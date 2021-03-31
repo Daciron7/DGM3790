@@ -8,7 +8,7 @@ import mongoose from 'mongoose'
 import * as dotenv from 'dotenv'
 import cors from 'cors'
 
-const _dirname = path.dirname(new URL(import.meta.url).pathname)
+const __dirname = path.dirname(new URL(import.meta.url).pathname)
 
 mongoose.set('useFindAndModify', false);
 
@@ -26,7 +26,7 @@ app.use(express.json())
 
 //app.use(express.static('public'))
 
-app.use(express.static(path.join(_dirname, '_client/build')))
+app.use(express.static(path.join(__dirname, '_client/build')))
 
 app.use('/api', apiRouter)
 
