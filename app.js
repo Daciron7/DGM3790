@@ -41,9 +41,15 @@ app.use((req, res, next) => {
 const main = async () => {
     await mongoose.connect(`${process.env.DGM4790_CONNECTION_STRING}`,
     {
-        useNewUrlParser:true,
-        useUnifiedTopology:true,
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
     })
+    try {
+        await mongoose.connect(`${process.env.DGM4790_CONNECTION_STRING}`, 
+        { useNewUrlParser: true})
+    } catch (error) {
+        handleError(error)
+    }
     app.listen(port, () => {
         console.log('Testing app listening at http://localhost:${port}')
     })
