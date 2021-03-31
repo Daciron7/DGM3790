@@ -12,7 +12,6 @@ const _dirname = path.dirname(new URL(import.meta.url).pathname)
 
 mongoose.set('useFindAndModify', false);
 
-
 dotenv.config()
 
 const port = process.env.PORT || 5050
@@ -45,8 +44,6 @@ const main = async () => {
         useNewUrlParser:true,
         useUnifiedTopology:true,
     })
-    mongoose.then(() => console.log('MongoDB Connected...'))
-    mongoose.catch((err) => console.log(err))
     app.listen(port, () => {
         console.log('Testing app listening at http://localhost:${port}')
     })
