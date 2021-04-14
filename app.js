@@ -44,6 +44,7 @@ const main = async () => {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
+    
     app.listen(port, () => {
         console.log('Testing app listening at http://localhost:${port}')
     })
