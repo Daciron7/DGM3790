@@ -18,7 +18,7 @@ export const cards = async (req, res) => {
     if (!cards) {
         return res.status(400).json({Message: `No cards found!`})
     }
-    res.json(movies)
+    res.json(cards)
 }
 
 export const getCardById = async (req, res) => {
