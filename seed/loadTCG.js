@@ -12,9 +12,7 @@ const seedMongo = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
 })
-  } catch (error) {
-    handleError(error)
-  }
+
 
 
   
