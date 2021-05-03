@@ -6,16 +6,17 @@ dotenv.config()
 
 const seedMongo = async () => {
   // Mongoose is not connected when the seed is run standalone, so start a new connection here
-  try {
     await mongoose.connect(`${process.env.DGM4790_CONNECTION_STRING}`,
   {
       useNewUrlParser: true,
-      useUnifiedTopology: true,
+       useUnifiedTopology: true,
+  
 })
-
-
+   
 
   
+
+
   const options = {
     method: 'GET',
     url: 'https://api.pokemontcg.io/v2/cards',
@@ -36,7 +37,7 @@ const seedMongo = async () => {
       console.error(error)
     }
     
-  }
+  }  
   
   const addCard = async (oneCard) => {
       const card = new Cards({
