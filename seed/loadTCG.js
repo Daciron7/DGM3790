@@ -33,7 +33,10 @@ const seedMongo = async () => {
       //await addCards(response.data.d[0])
       await addCards(response.data.d)
       await mongoose.connection.close() // close connection after all work is done
-    } catch (error) {
+    
+    return {response}
+  }
+    catch (error) {
       console.error(error)
     }
     
