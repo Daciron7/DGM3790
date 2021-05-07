@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
 const cardSchema = new Schema({
-    title: {
+    name: {
         type: String,
         required: true
     },
@@ -15,7 +15,7 @@ const cardSchema = new Schema({
         type: Object,
         required: false
     },
-    hp: {
+    id: {
         type: String,
         required: true
     },
@@ -26,4 +26,4 @@ const cardSchema = new Schema({
 })
 
 
-export const Cards = mongoose.model('Cards', cardSchema)
+export const Card = mongoose.model('Card', cardSchema)

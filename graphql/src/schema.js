@@ -16,27 +16,33 @@ const DateTime = asNexusMethod(GraphQLDateTime, 'date')
 const Query = objectType({
   name: 'Query',
   definition(t) {
-    t.nonNull.list.nonNull.field('allUsers', {
-      type: 'User',
+    t.nonNull.list.nonNull.field('allCards', {
+      type: 'Card',
       resolve: (_parent, _args, context) => {
-        return context.prisma.user.findMany()
+        return context.prisma.card.findMany()
+      },
+    })
+    t.nonNull.list.nonNull.field('allPokemon', {
+      type: 'Pokemon',
+      resolve: (_parent, _args, context) => {
+        return context.prisma.pokemon.findMany()
       },
     })
 
-    t.nullable.field('postById', {
-      type: 'Post',
+    t.nullable.field('cardbyId', {
+      type: 'Pokemon',
       args: {
         id: intArg(),
       },
       resolve: (_parent, args, context) => {
-        return context.prisma.post.findUnique({
+        return context.prisma.pokemon.findUnique({
           where: { id: args.id || undefined },
         })
       },
     })
 
-/*     t.nonNull.list.nonNull.field('feed', {
-      type: 'Post',
+/* t.nonNull.list.nonNull.field('pokemonbyId', {
+      type: '',
       args: {
         searchString: stringArg(),
         skip: intArg(),
@@ -97,46 +103,51 @@ const Query = objectType({
 const Mutation = objectType({
   name: 'Mutation',
   definition(t) {
-    t.nonNull.field('createGameUser', {
-      type: 'GameUser',
+    t.nonNull.field('createPokemon', {
+      type: 'Pokemon',
       args: {
         data: nonNull(
           arg({
-            type: 'GameUserCreateInput',
+            type: 'PokemonCreateInput',
           }),
         ),
       },
       resolve: (_, args, context) => {
-        return context.prisma.gameUser.create({
+        return context.prisma.pokemon.create({
           data: {
             name: args.data.name,
-            email: args.data.email,
+            types: args.data.types,
+            images: args.data.images,
           },
         })
       },
     })
 
-    t.field('createGame', {
-      type: 'Game',
+    t.field('createCard', {
+      type: 'Pokemon',
       args: {
         data: nonNull(
           arg({
-            type: 'GameCreateInput',
+            type: 'PokemonCreateInput',
           }),
         ),
-        gameUserEmail: nonNull(stringArg()),
+        pokemonEmail: nonNull(stringArg()),
       },
       resolve: (_, args, context) => {
-        return context.prisma.post.create({
+        return context.prisma.pokemon.create({
           data: {
-            title: args.data.title,
-            steamAppID: args.data.steamAppID,
+            name: args.data.name,
+            types: args.data.types,
+            images: args.data.images,
+            pokemon: {
+              connect: { email: args.pokemonEmail },
+            },
           },
         })
       },
     })
 
-    /*t.field('togglePublishPost', {
+   /* t.field('togglePublishPost', {
       type: 'Post',
       args: {
         id: nonNull(intArg()),
@@ -179,13 +190,13 @@ const Mutation = objectType({
       },
     }) */
 
-    t.field('deleteGame', {
-      type: 'Game',
+    t.field('deletePokemon', {
+      type: 'Pokemon',
       args: {
         id: nonNull(intArg()),
       },
       resolve: (_, args, context) => {
-        return context.prisma.game.delete({
+        return context.prisma.pokemon.delete({
           where: { id: args.id },
         })
       },
@@ -193,42 +204,42 @@ const Mutation = objectType({
   },
 })
 
-const gameUser = objectType({
-  name: 'gameUser',
+const Pokemon = objectType({
+  name: 'Pokemon',
   definition(t) {
     t.nonNull.int('id')
     t.string('name')
-    t.nonNull.string('email')
-    t.nonNull.list.nonNull.field('games', {
-      type: 'Game',
+    t.nonNull.string('types')
+    t.nonNull.list.nonNull.field('pokemon', {
+      type: 'Pokemon',
       resolve: (parent, _, context) => {
-        return context.prisma.gameUser
+        return context.prisma.pokemon
           .findUnique({
             where: { id: parent.id || undefined },
           })
-          .posts()
+          .pokemon()
       },
     })
   },
 })
 
-const Game = objectType({
-  name: 'Game',
+const Pokemon = objectType({
+  name: 'Pokemon',
   definition(t) {
     t.nonNull.int('id')
     t.nonNull.field('createdAt', { type: 'DateTime' })
     t.nonNull.field('updatedAt', { type: 'DateTime' })
-    t.nonNull.string('title')
-    t.string('steamAppID')
-    t.string('thumb')
-    t.field('gameUser', {
-      type: 'gameUser',
+    t.nonNull.string('name')
+    t.string('types')
+    t.string('images')
+    t.field('pokemon', {
+      type: 'Pokemon',
       resolve: (parent, _, context) => {
         return context.prisma.post
           .findUnique({
             where: { id: parent.id || undefined },
           })
-          .gameUser()
+          .pokemon()
       },
     })
   },
@@ -252,22 +263,30 @@ const UserUniqueInput = inputObjectType({
     t.int('id')
     t.string('email')
   },
-}) */
+})
 
-const GameCreateInput = inputObjectType({
-  name: 'GameCreateInput',
+const PostCreateInput = inputObjectType({
+  name: 'PostCreateInput',
   definition(t) {
     t.nonNull.string('title')
-    t.string('steamAppID')
+    t.string('content')
+  },
+})*/
+
+const PokemonCreateInput = inputObjectType({
+  name: 'PokemonCreateInput',
+  definition(t) {
+    t.nonNull.string('name')
+    t.string('types')
+    t.string('images')
   },
 })
 
-const GameUserCreateInput = inputObjectType({
-  name: 'GameUserCreateInput',
+const CardCreateInput = inputObjectType({
+  name: 'CardCreateInput',
   definition(t) {
     t.nonNull.string('email')
-    t.string('name')
-    t.list.nonNull.field('posts', { type: 'PostCreateInput' })
+    t.string('id')
   },
 })
 
@@ -275,11 +294,11 @@ const schema = makeSchema({
   types: [
     Query,
     Mutation,
-    Game,
-    GameUser,
+    Pokemon,
+    Card,
     //UserUniqueInput,
-    GameUserCreateInput,
-    GameCreateInput,
+    PokemonCreateInput,
+    CardCreateInput,
     //SortOrder,
     //PostOrderByUpdatedAtInput,
     DateTime,
@@ -301,3 +320,4 @@ const schema = makeSchema({
 module.exports = {
   schema: schema,
 }
+

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Cards } from '../models/cards.js'
+import { Card } from '../models/cards.js'
 import * as dotenv from 'dotenv'
 import mongoose from 'mongoose'
 dotenv.config()
@@ -19,11 +19,11 @@ const seedMongo = async () => {
 
   const options = {
     method: 'GET',
-    url: 'https://api.pokemontcg.io/v2/cards',
-    params: {q: 'Pikachu'},
+    url: 'https://api.pokemontcg.io/v2/cards?page=1',
+    params: {q:'name:charizard'},
     headers: {
       'x-rapidapi-key': `${process.env.POKEMON_TCG_API_KEY}`,
-      'x-rapidapi-host': 'https://api.pokemontcg.io'
+      'x-rapidapi-host': 'https://api.pokemontcg.io/v2/cards'
     }
   }
     
@@ -33,8 +33,6 @@ const seedMongo = async () => {
       //await addCards(response.data.d[0])
       await addCards(response.data.d)
       await mongoose.connection.close() // close connection after all work is done
-    
-    return {response}
   }
     catch (error) {
       console.error(error)
@@ -43,11 +41,11 @@ const seedMongo = async () => {
   }  
   
   const addCard = async (oneCard) => {
-      const card = new Cards({
-          title: oneCard.l,
+      const card = new Card({
+          name: oneCard.l,
           types: oneCard.types,
           image: oneCard.i,
-          hp: oneCard.hp,
+          id: oneCard.id,
           attacks: oneCard.attacks
       })
       //console.log(card)

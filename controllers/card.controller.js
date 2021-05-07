@@ -2,7 +2,7 @@ import { Cards } from '../models/cards.js'
 
 export const addCards = ((req, res) => {
     const card = new Cards({
-        title: req.body.title,
+        name: req.body.name,
         types: req.body.types,
         image: req.body.image,
         id: req.body.id,
@@ -38,7 +38,7 @@ export const getCardById = async (req, res) => {
 export const updateCard = async (req, res) => {
     const cardId = req.body.data.cardId
     const updatedObj = {
-        title: req.body.data.title,
+        name: req.body.data.name,
         types: req.body.data.types,
         attacks: req.body.data.attacks,
         image: {

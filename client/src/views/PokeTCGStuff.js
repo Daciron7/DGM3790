@@ -65,7 +65,7 @@ const CardList = () => {
 
     const handleSearch = () => {
       if (debouncedName) {
-        setCardList(cardList.filter(card => card.title.includes(debouncedName)))
+        setCardList(cardList.filter(card => card.name.includes(debouncedName)))
       } else {
         fetchCards()
       }
@@ -85,9 +85,9 @@ const CardList = () => {
         const result = await axios.put('/card/update', {
           data: {
             cardId: values.id,
-            title: values.title,
+            name: values.name,
             types: values.types,
-            hp: values.hp,
+            id: values.id,
             imageUrl: values.imageUrl,
             height: values.height,
             width: values.width,
@@ -144,11 +144,11 @@ const CardList = () => {
                     height='300'
                     className={classes.media}
                     image={card.image?.imageUrl}
-                    title={card.title}
+                    title={card.name}
                   ></CardMedia>
                   <CardContent>
                     <Typography gutterBottom variant='h5' component='h2'>
-                      {card.title}
+                      {card.name}
                     </Typography>
                     <Box className={classes.content}>
                       <Typography variant='subtitle1' color='textSecondary'>
@@ -231,16 +231,16 @@ const CardList = () => {
                 </DialogContentText>
                 <TextField
                   autoFocus
-                  id='title'
-                  name='title'
-                  label='Card Title'
+                  id='name'
+                  name='name'
+                  label='Card Name'
                   type='text'
                   fullWidth
-                  value={values.title}
+                  value={values.name}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  error={Boolean(touched.title && errors.title)}
-                  helperText={touched.title && errors.title}
+                  error={Boolean(touched.name && errors.name)}
+                  helperText={touched.name && errors.name}
                 />
                 <Box className={classes.content}>
                   <TextField
@@ -252,8 +252,8 @@ const CardList = () => {
                     value={values.attacks}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    error={Boolean(touched.year && errors.year)}
-                    helperText={touched.year && errors.year}
+                    error={Boolean(touched.attacks && errors.attacks)}
+                    helperText={touched.attacks && errors.attacks}
                   />
                   <TextField
                     autoFocus
@@ -264,8 +264,8 @@ const CardList = () => {
                     value={values.types}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    error={Boolean(touched.rank && errors.rank)}
-                    helperText={touched.rank && errors.rank}
+                    error={Boolean(touched.types && errors.types)}
+                    helperText={touched.types && errors.types}
                   />
                 </Box>
                 <TextField

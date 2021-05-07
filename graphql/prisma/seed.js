@@ -2,16 +2,16 @@ const { PrismaClient } = require('@prisma/client')
 
 const prisma = new PrismaClient()
 
-const gamerData = [
+const cardData = [
   {
     name: 'Alice',
     email: 'alice@prisma.io',
     game: {
       create: [
         {
-          title: 'Company of Heroes',
-          steamAppID: '4560',
-          thumb: 'https:\/\/cdn.cloudflare.steamstatic.com\/steam\/apps\/228200\/capsule_sm_120.jpg?t=1603127288'
+          name: 'Jolteon',
+          types: 'Lightning',
+          images: 'https://images.pokemontcg.io/ex2/6.png',
         },
       ],
     },
@@ -19,30 +19,25 @@ const gamerData = [
   {
     name: 'Nilu',
     email: 'nilu@prisma.io',
-    game: {
+    posts: {
       create: [
         {
-          title: 'Take On Helicopters',
-          steamAppID: '65730',
-          thumb: 'https:\/\/cdn.cloudflare.steamstatic.com\/steam\/apps\/65730\/capsule_sm_120.jpg?t=1593518800'
+          name: 'Wailord',
+          types: 'Water',
+          images: 'https://images.pokemontcg.io/ex12/14.png',
         },
       ],
     },
   },
   {
-    name: 'Buddy',
-    email: 'buddy@prisma.io',
-    game: {
+    name: 'Mahmoud',
+    email: 'mahmoud@prisma.io',
+    posts: {
       create: [
         {
-          title: 'PT Boats: South Gambit',
-          steamAppID: '10260',
-          thumb: 'https:\/\/cdn.cloudflare.steamstatic.com\/steam\/apps\/10260\/capsule_sm_120.jpg?t=1447354640'
-        },
-        {
-          title: 'Sid Meiers Civilization IV',
-          steamAppID: '3900',
-          thumb: 'https:\/\/cdn.cloudflare.steamstatic.com\/steam\/apps\/3900\/capsule_sm_120.jpg?t=1573063101',
+          name: 'Chimecho',
+          types: 'Psychic',
+          images: 'https://images.pokemontcg.io/ex9/12.png',
         },
       ],
     },
@@ -51,11 +46,11 @@ const gamerData = [
 
 async function main() {
   console.log(`Start seeding ...`)
-  for (const i of gamerData) {
-    const gameUser = await prisma.user.create({
+  for (const i of cardData) {
+    const card = await prisma.card.create({
       data: i,
     })
-    console.log(`Created gameUser with id: ${gameUser.id}`)
+    console.log(`Created card with id: ${card.id}`)
   }
   console.log(`Seeding finished.`)
 }
